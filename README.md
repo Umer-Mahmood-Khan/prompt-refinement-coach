@@ -7,7 +7,7 @@ This tool helps professionals communicate more effectively with AI agents like G
 ---
 
 ## 🔍 Live Demo
-👉 [Launch the app on Streamlit Cloud](https://your-username-prompt-refinement-coach.streamlit.app)
+👉 [Launch the app on Streamlit Cloud](https://h2qtrtv3kqcbhjnbxhggmh.streamlit.app/)
 
 ---
 
