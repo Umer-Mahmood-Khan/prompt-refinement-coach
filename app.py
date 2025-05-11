@@ -30,7 +30,7 @@ def construct_system_prompt(domain, user_input):
         f"---\n"
         f"Original: {user_input.strip()}\n"
         f"---\n"
-        f"Improved: (use clear, numbered steps like 1., 2., 3.):"
+        f"Improved (use clear, numbered steps like 1., 2., 3.):"
     )
 
 # Streamlit UI
@@ -40,19 +40,27 @@ st.write("Transform vague instructions into clear, structured prompts for AI age
 
 domain = st.selectbox("Select a prompt domain:", ["Business", "HR", "Marketing", "General"])
 
-default_input = st.text_area("Enter your vague instruction:", height=120)
+# Initialize session state
+if "user_prompt" not in st.session_state:
+    st.session_state["user_prompt"] = ""
 
 if st.button("Use Sample Prompt"):
-    default_input = EXAMPLES.get(domain, list(EXAMPLES.values())[0])
-    st.session_state["input"] = default_input
-    st.experimental_rerun()
+    st.session_state["user_prompt"] = EXAMPLES.get(domain, list(EXAMPLES.values())[0])
+
+user_input = st.text_area(
+    "Enter your vague instruction:",
+    value=st.session_state["user_prompt"],
+    key="prompt_input",
+    height=120
+)
 
 if st.button("Refine Prompt"):
-    if not default_input.strip():
+    cleaned_input = user_input.strip()
+    if not cleaned_input:
         st.warning("Please enter a prompt.")
     else:
         with st.spinner("Refining..."):
-            formatted_prompt = construct_system_prompt(domain, default_input)
+            formatted_prompt = construct_system_prompt(domain, cleaned_input)
             output = call_huggingface(formatted_prompt)
             st.markdown("### 🔍 Refined Prompt")
             st.success(output.replace(formatted_prompt, "").strip())
