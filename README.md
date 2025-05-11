@@ -12,7 +12,7 @@ This tool helps professionals communicate more effectively with AI agents like G
 ---
 
 ## 🎥 Walkthrough Video
-[Watch the demo](https://loom.com/share/your-video-link)
+[Watch the demo](https://youtu.be/35Pv9dm9Xl0)
 
 ---
 
